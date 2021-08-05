@@ -3,53 +3,47 @@ import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import { getUser } from "../../utilities/users-service";
 import AuthPage from "../AuthPage/AuthPage";
 import NavBar from "../../components/NavBar/NavBar";
-import * as puppyAPI from "../../utilities/puppies-api";
-import PuppyDetailPage from "../PuppyDetailPage/PuppyDetailPage";
-import EditPuppyPage from "../EditPuppyPage/EditPuppyPage";
-import PuppiesPage from "../PuppiesPage/PuppiesPage";
-import NewPuppyPage from "../NewPuppyPage/NewPuppyPage";
+import * as surfSpotAPI from "../../utilities/surfspots-api";
+import SurfSpotDetailPage from "../SurfSpotDetailPage/SurfSpotDetailPage";
+import EditSurfSpotPage from "../EditSurfSpotPage/EditSurfSpotPage";
+import SurfSpotPage from "../SurfSpotPage/SurfSpotPage";
+import NewSurfSpotPage from "../NewSurfSpotPage/NewSurfSpotPage";
 import "./App.css";
 
 export default function App(props) {
   const [user, setUser] = useState(getUser());
-  const [puppies, setPuppies] = useState([]);
+  const [surfspots, setsurfspots] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
-    async function getPuppies() {
-      // retrieve the puppies data
-      const puppies = await puppyAPI.getAll();
-      // set it to state
-      setPuppies(puppies);
+    async function getSurfSpots() {
+      const surfspots = await surfSpotAPI.getAll();
+
+      setsurfspots(surfspots);
     }
-    getPuppies();
+    getSurfSpots();
   }, []);
 
   useEffect(() => {
-    // This is listenting for each time puppies state is changed,
-    // then will run our function below to reroute
     history.push("/");
-  }, [puppies, history]);
+  }, [surfspots, history]);
 
-  async function handleAddPuppy(newPuppyData) {
-    const newPuppy = await puppyAPI.create(newPuppyData);
-    setPuppies([...puppies, newPuppy]);
+  async function handleAddSurfSpot(newSurfSpotData) {
+    const newSurfSpot = await surfSpotAPI.create(newSurfSpotData);
+    setsurfspots([...surfspots, newSurfSpot]);
   }
 
-  // code the update puppy handler function to invoke the fetch call and update state
-  async function handleUpdatePuppy(updatedPuppyData) {
-    // invoke the fetch call from api services
-    const updatedPuppy = await puppyAPI.update(updatedPuppyData);
-    // set the new state using the result from the fetch call
-    const newPuppiesArray = puppies.map((p) =>
-      p._id === updatedPuppy._id ? updatedPuppy : p
+  async function handleUpdateSurfSpot(updatedSurfSpotData) {
+    const updatedSurfSpot = await surfSpotAPI.update(updatedSurfSpotData);
+    const newsurfspotsArray = surfspots.map((p) =>
+      p._id === updatedSurfSpot._id ? updatedSurfSpot : p
     );
-    setPuppies(newPuppiesArray);
+    setsurfspots(newsurfspotsArray);
   }
 
-  async function handleDeletePuppy(id) {
-    await puppyAPI.deleteOne(id);
-    setPuppies(puppies.filter((puppy) => puppy._id !== id));
+  async function handleDeleteSurfSpot(id) {
+    await surfSpotAPI.deleteOne(id);
+    setsurfspots(surfspots.filter((SurfSpot) => SurfSpot._id !== id));
   }
   return (
     <main className="App">
@@ -57,19 +51,22 @@ export default function App(props) {
         <>
           <NavBar user={user} setUser={setUser} />
           <Switch>
-            <Route exact path="/puppies">
-              <PuppiesPage puppies={puppies} handleDeletePuppy={handleDeletePuppy}/>
+            <Route exact path="/surfspots">
+              <SurfSpotPage
+                surfspots={surfspots}
+                handleDeleteSurfSpot={handleDeleteSurfSpot}
+              />
             </Route>
-            <Route exact path="/puppies/new">
-              <NewPuppyPage handleAddPuppy={handleAddPuppy} />
+            <Route exact path="/surfspots/new">
+              <NewSurfSpotPage handleAddSurfSpot={handleAddSurfSpot} />
             </Route>
-            <Route exact path="/puppies/details">
-              <PuppyDetailPage />
+            <Route exact path="/surfspots/details">
+              <SurfSpotDetailPage />
             </Route>
-            <Route exact path="/puppies/edit">
-              <EditPuppyPage handleUpdatePuppy={handleUpdatePuppy} />
+            <Route exact path="/surfspots/edit">
+              <EditSurfSpotPage handleUpdateSurfSpot={handleUpdateSurfSpot} />
             </Route>
-            <Redirect to="/puppies" />
+            <Redirect to="/surfspots" />
           </Switch>
         </>
       ) : (
@@ -78,4 +75,3 @@ export default function App(props) {
     </main>
   );
 }
-

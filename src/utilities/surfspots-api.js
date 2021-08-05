@@ -1,22 +1,22 @@
-const BASE_URL = '/api/puppies';
+const BASE_URL = '/api/surfspots';
 
 export function getAll() {
 	return fetch(BASE_URL).then(res => res.json());
 }
 
-export function create(newPuppyData) {
+export function create(newSurfSpotData) {
 	return fetch(BASE_URL, {
 		method: 'POST',
 		headers: { 'content-type': 'application/json' },
-		body: JSON.stringify(newPuppyData),
+		body: JSON.stringify(newSurfSpotData),
 	}).then(res => res.json());
 }
 
-export function update(updatedPuppyData) {
-	return fetch(`${BASE_URL}/${updatedPuppyData._id}`, {
+export function update(updatedSurfSpotData) {
+	return fetch(`${BASE_URL}/${updatedSurfSpotData._id}`, {
 		method: 'PUT',
 		headers: { 'content-type': 'application/json' },
-		body: JSON.stringify(updatedPuppyData),
+		body: JSON.stringify(updatedSurfSpotData),
 	}).then(res => res.json());
 }
 

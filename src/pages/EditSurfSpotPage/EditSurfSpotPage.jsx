@@ -1,12 +1,11 @@
-import React, { Component, useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
-export default function NewPuppyPage(props) {
+export default function EditSurfSpotPage(props) {
+	const location = useLocation();
+
 	const [invalidForm, setValidForm] = useState(true);
-	const [formData, setFormData] = useState({
-		name: '',
-		breed: 'Mixed',
-		age: '0',
-	});
+	const [formData, setFormData] = useState(location.state.SurfSpot);
 
 	const formRef = useRef();
 
@@ -18,7 +17,7 @@ export default function NewPuppyPage(props) {
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		props.handleAddPuppy(formData);
+		props.handleUpdateSurfSpot(formData);
 	};
 
 	const handleChange = e => {
@@ -30,10 +29,10 @@ export default function NewPuppyPage(props) {
 
 	return (
 		<>
-			<h1>Add Puppy</h1>
-			<form autoComplete='off' ref={formRef} onSubmit={handleSubmit}>
+			<h1>Edit</h1>
+			<form ref={formRef} autoComplete='off' onSubmit={handleSubmit}>
 				<div className='form-group'>
-					<label>Pup's Name (required)</label>
+					<label>SurfSpot (required)</label>
 					<input
 						className='form-control'
 						name='name'
@@ -43,27 +42,33 @@ export default function NewPuppyPage(props) {
 					/>
 				</div>
 				<div className='form-group'>
-					<label>Pup's Breed (required)</label>
+					<label>Difficulty (required)</label>
 					<input
 						className='form-control'
-						name='breed'
-						value={formData.breed}
+						name='difficulty'
+						value={formData.difficulty}
 						onChange={handleChange}
 						required
 					/>
 				</div>
 				<div className='form-group'>
-					<label>Pup's Age</label>
+					<label>Location</label>
 					<input
 						className='form-control'
-						name='age'
+						name='location'
 						value={formData.age}
 						onChange={handleChange}
 					/>
 				</div>
-				<button type='submit' className='btn' disabled={invalidForm}>
-					ADD PUPPY
+				<button
+					type='submit'
+					className='btn btn-xs'
+					disabled={invalidForm}
+				>
+					SAVE SPOT
 				</button>
+				&nbsp;&nbsp;
+				<Link to='/'>CANCEL</Link>
 			</form>
 		</>
 	);

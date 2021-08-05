@@ -1,19 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './PuppyListItem.css';
+import './SurfSpotListItem.css';
 
-function PuppyListItem({ puppy, handleDeletePuppy }) {
+function SurfSpotListItem({ SurfSpot, handleDeleteSurfSpot }) {
 	return (
 		<div className='panel panel-default'>
 			<div className='panel-heading'>
-				<h3 className='panel-title'>{puppy.name}</h3>
+				<h3 className='panel-title'>{SurfSpot.name}</h3>
 			</div>
-			<div className='panel-footer PuppyListItem-action-panel'>
+			<div className='panel-footer SurfSpotListItem-action-panel'>
 				<Link
 					className='btn btn-xs btn-info'
 					to={{
-						pathname: 'puppies/details',
-						state: { puppy },
+						pathname: 'surfspots/details',
+						state: { SurfSpot },
 					}}
 				>
 					DETAILS
@@ -21,15 +21,15 @@ function PuppyListItem({ puppy, handleDeletePuppy }) {
 				<Link
 					className='btn btn-xs btn-warning'
 					to={{
-						pathname: 'puppies/edit',
-						state: { puppy },
+						pathname: 'surfspots/edit',
+						state: { SurfSpot },
 					}}
 				>
 					EDIT
 				</Link>
 				<button
 					className='btn btn-xs btn-danger margin-left-10'
-					onClick={() => handleDeletePuppy(puppy._id)}
+					onClick={() => handleDeleteSurfSpot(SurfSpot._id)}
 				>
 					DELETE
 				</button>
@@ -38,4 +38,4 @@ function PuppyListItem({ puppy, handleDeletePuppy }) {
 	);
 }
 
-export default PuppyListItem;
+export default SurfSpotListItem;

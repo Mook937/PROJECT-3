@@ -9,7 +9,7 @@ require('dotenv').config();
 // Connect to the database
 require('./config/database');
 
-var puppiesRouter = require('./routes/api/puppies');
+var surfspotsRouter = require('./routes/api/Surfspots');
 
 const app = express();
 
@@ -27,7 +27,7 @@ app.use(require('./config/checkToken'));
 
 // Put API routes here, before the "catch all" route
 app.use('/api/users', require('./routes/api/users'));
-app.use('/api/puppies', puppiesRouter)
+app.use('/api/surfspots', surfspotsRouter)
 // The following "catch all" route (note the *) is necessary
 // to return the index.html on all non-AJAX requests
 app.get('/*', function (req, res) {

@@ -25,11 +25,11 @@ export default function LogIn({ setUser }) {
 		}
 	}
 	return (
-		<div>
+		<div className= 'column'>
 			<div className='form-container' onSubmit={handleSubmit}>
 				<form autoComplete='off'>
 					<label>Email</label>
-					<input
+					<input className = 'input'
 						type='text'
 						name='email'
 						value={credentials.email}
@@ -37,14 +37,14 @@ export default function LogIn({ setUser }) {
 						required
 					/>
 					<label>Password</label>
-					<input
+					<input className = 'input'
 						type='password'
 						name='password'
 						value={credentials.password}
 						onChange={handleChange}
 						required
 					/>
-					<button type='submit'>LOG IN</button>
+					<button className = 'button' type='submit'>LOG IN</button>
 				</form>
 			</div>
 			<p className='error-message'>&nbsp;{error}</p>

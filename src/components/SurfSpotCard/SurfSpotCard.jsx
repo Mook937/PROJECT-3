@@ -1,18 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function PuppyCard({ puppy }) {
+function SurfSpotCard({ SurfSpot }) {
 	return (
 		<div className='panel panel-default'>
 			<div className='panel-heading'>
-				<h3 className='panel-title'>{puppy.name}</h3>
+				<h3 className='panel-title'>{SurfSpot.name}</h3>
 			</div>
 			<div className='panel-body'>
 				<dl>
-					<dt>Breed</dt>
-					<dd>{puppy.breed}</dd>
-					<dt>Age</dt>
-					<dd>{puppy.age}</dd>
+					<dt>Name</dt>
+					<dd>{SurfSpot.difficulty}</dd>
+					<dt>Location</dt>
+					<dd>{SurfSpot.age}</dd>
 				</dl>
 			</div>
 			<div className='panel-footer'>
@@ -22,4 +22,4 @@ function PuppyCard({ puppy }) {
 	);
 }
 
-export default PuppyCard;
+export default SurfSpotCard;
