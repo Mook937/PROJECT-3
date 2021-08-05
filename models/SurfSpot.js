@@ -13,3 +13,6 @@ var SurfSpotSchema = new Schema(
 );
 
 module.exports = mongoose.model('SurfSpot', SurfSpotSchema);
+
+
+// testing pushing 
