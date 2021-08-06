@@ -4,6 +4,9 @@ Mooks Surf Journal is a full stack application that allows users to log in and r
 
 For this project I used the Express framework with node.js mongoDb, Mongoose, JavaScript, and React 
 
+In terms of Icebox features, I want to allow users view other users favorite surf spots, and implement a follow feature. Aditionally, I would like to 
+completly restyle the app. 
+
 DEPLOYED APP
 
 https://react-surf-app.herokuapp.com/
